@@ -4,15 +4,13 @@ function App() {
   const [count, setCount] = useState(25)
 
   function decrementCount() {
-    setState(prevState => {
-      return { count: prevState.count - 1 }
-    })
+    setCount(prevCount => prevCount - 1)
   }
+
   function incrementCount() {
-    setState(prevState => {
-      return { count: prevState.count + 1 }
-    })
+    setCount(prevCount => prevCount + 1)
   }
+
 
   return (
     <>
