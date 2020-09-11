@@ -1,17 +1,26 @@
+import React, { useState } from "react";
 
-import React from "react";
+function App() {
+  const [count, setCount] = useState(25)
 
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-      </>
-    );
+  function decrementCount() {
+    setState(prevState => {
+      return { count: prevState.count - 1 }
+    })
   }
+  function incrementCount() {
+    setState(prevState => {
+      return { count: prevState.count + 1 }
+    })
+  }
+
+  return (
+    <>
+      <button onClick={decrementCount}>-</button>
+      <span>{count}</span>
+      <button onClick={incrementCount}>+</button>
+    </>
+  )
 }
 
 export default App;
