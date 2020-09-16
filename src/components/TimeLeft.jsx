@@ -3,8 +3,11 @@
 import React, {useEffect} from "react";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
+import audiofile from "../../audio.mp3";
 
 momentDurationFormatSetup(moment);
+
+const audio = new Audio(audiofile);
 
 const TimeLeft = ({
     breakLength,
@@ -15,10 +18,12 @@ const TimeLeft = ({
     setTimeLeft,
 }) => {
     useEffect(() => {
+        if (timeLeft === 6) {
+            // play the audio
+            audio.play();
+        }
         // if timeLeft is zero
         if (timeLeft === 0) {
-            // play the audio
-            // audioElement?.current?.play(); // optional chaining
             // change session to break or break to session
             if (timerLabel === "Session") {
                 setTimerLabel("Break");

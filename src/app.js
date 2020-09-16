@@ -26,29 +26,37 @@ function App() {
     const decrementBreakLength = () => {
         const newBreakLength = breakLength - 60;
 
-        if (newBreakLength < 0) {
-            setBreakLength(0);
+        if (newBreakLength < 60) {
+            setBreakLength(60);
         } else {
             setBreakLength(newBreakLength);
         }
     };
 
     const incrementBreakLength = () => {
-        setBreakLength(breakLength + 60);
+        if (breakLength >= 60 * 59) {
+            setBreakLength(60 * 59);
+        } else {
+            setBreakLength(breakLength + 60);
+        }
     };
 
     const decrementSessionLength = () => {
         const newSessionLength = sessionLength - 60;
 
-        if (newSessionLength < 0) {
-            setSessionLength(0);
+        if (newSessionLength < 60) {
+            setSessionLength(60);
         } else {
             setSessionLength(newSessionLength);
         }
     };
 
     const incrementSessionLength = () => {
-        setSessionLength(sessionLength + 60);
+        if (sessionLength >= 60 * 59) {
+            setSessionLength(60 * 59);
+        } else {
+            setSessionLength(sessionLength + 60);
+        }
     };
 
     const isStarted = IntervalId !== null;
@@ -61,7 +69,7 @@ function App() {
             //decrement time left by one every second (1000ms)
             const newIntervalId = setInterval(() => {
                 setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
-            }, 100);
+            }, 1000);
             setIntervalId(newIntervalId);
         }
     };
