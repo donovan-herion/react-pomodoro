@@ -13,7 +13,7 @@ const Session = ({
         .minutes();
     return (
         <div>
-            <h3>Session Time</h3>
+            <h3 style={sessionTitle}>Session Time</h3>
             <div style={sessionContainer}>
                 <button
                     style={buttonPlusMinusStyle}
@@ -21,7 +21,9 @@ const Session = ({
                     onClick={decrementSessionLength}>
                     -
                 </button>
-                <p id="session-length">{sessionLengthInMinutes}</p>
+                <p style={sessionTimeStyle} id="session-length">
+                    {sessionLengthInMinutes}
+                </p>
                 <button
                     style={buttonPlusMinusStyle}
                     disabled={isStarted}
@@ -33,19 +35,35 @@ const Session = ({
     );
 };
 
+const sessionTitle = {
+    textAlign: "center",
+};
+
 const sessionContainer = {
     display: "flex",
     justifyContent: "space-between",
-    marginTop: "5px",
+    marginTop: "20px",
+    width: "18vw",
     alignItems: "center",
 };
 
+const sessionTimeStyle = {
+    backgroundColor: "white",
+    width: "90px",
+    height: "90px",
+    textAlign: "center",
+    padding: "27px 0",
+    borderRadius: "50%",
+    color: "black",
+};
+
 const buttonPlusMinusStyle = {
-    border: "solid 1.5px white",
-    borderRadius: "10px",
+    border: "solid 2px white",
+    borderRadius: "15px",
     color: "white",
     fontWeight: "bold",
-    padding: "5px 10px",
+    fontSize: "1em",
+    padding: "10px 20px",
     backgroundColor: "#020529",
 };
 

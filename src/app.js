@@ -120,6 +120,7 @@ document.querySelector("body").style.backgroundColor = "#020529";
 
 const containerStyle = {
     color: "white",
+    fontSize: "2em",
 };
 
 const sessionBreakContainer = {
@@ -129,12 +130,12 @@ const sessionBreakContainer = {
 
 const TitleStyle = {
     textAlign: "center",
-    margin: "5vh",
+    margin: "5vh 0 2vh",
 };
 
 const buttonContainerStyle = {
     width: "20vw",
-    margin: "10vh auto 0",
+    margin: "7vh auto 0",
     display: "flex",
     justifyContent: "space-between",
 };
@@ -142,8 +143,10 @@ const buttonContainerStyle = {
 const buttonStartResetStyle = {
     border: "solid 2px white",
     borderRadius: "10px",
+    width: "130px",
     color: "white",
     fontWeight: "bold",
+    fontSize: "1em",
     padding: "10px",
     backgroundColor: "#020529",
 };

@@ -37,7 +37,7 @@ const TimeLeft = ({
     return (
         <div style={timeLeftContainer}>
             <h3>{timerLabel}</h3>
-            <p>{formattedTimeLeft}</p>
+            <p style={formattedTimeLeftStyle}>{formattedTimeLeft}</p>
         </div>
     );
 };
@@ -45,14 +45,19 @@ const TimeLeft = ({
 const timeLeftContainer = {
     width: "20vw",
     height: "20vw",
-    margin: "5vh auto",
+    margin: "0 auto",
     padding: "5vw",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
-    border: "3px white solid",
+    border: "5px white solid",
     borderRadius: "50%",
+};
+
+const formattedTimeLeftStyle = {
+    fontWeight: "bold",
+    fontSize: "2em",
 };
 
 export default TimeLeft;
