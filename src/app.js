@@ -61,7 +61,7 @@ function App() {
             //decrement time left by one every second (1000ms)
             const newIntervalId = setInterval(() => {
                 setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
-            }, 1000);
+            }, 100);
             setIntervalId(newIntervalId);
         }
     };
@@ -76,32 +76,76 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div style={containerStyle} className="App">
+            <h1 style={TitleStyle}>Pomodoro</h1>
+            <div style={sessionBreakContainer}>
+                <Session
+                    sessionLength={sessionLength}
+                    decrementSessionLength={decrementSessionLength}
+                    incrementSessionLength={incrementSessionLength}
+                    isStarted={isStarted}
+                />
+                <Break
+                    breakLength={breakLength}
+                    decrementBreakLength={decrementBreakLength}
+                    incrementBreakLength={incrementBreakLength}
+                    isStarted={isStarted}
+                />
+            </div>
             <TimeLeft
                 breakLength={breakLength}
                 timerLabel={currentSessionType}
                 setTimerLabel={setCurrentSessionType}
                 sessionLength={sessionLength}
-                handleStartStopClick={handleStartStopClick}
-                startStopBtn={isStarted ? "Stop" : "Start"}
                 timeLeft={timeLeft}
                 setTimeLeft={setTimeLeft}
             />
-            <Session
-                sessionLength={sessionLength}
-                decrementSessionLength={decrementSessionLength}
-                incrementSessionLength={incrementSessionLength}
-                isStarted={isStarted}
-            />
-            <Break
-                breakLength={breakLength}
-                decrementBreakLength={decrementBreakLength}
-                incrementBreakLength={incrementBreakLength}
-                isStarted={isStarted}
-            />
-            <button onClick={handleResetButtonClick}>Reset</button>
+            <div style={buttonContainerStyle}>
+                <button
+                    style={buttonStartResetStyle}
+                    onClick={handleStartStopClick}>
+                    {isStarted ? "Stop" : "Start"}
+                </button>
+                <button
+                    style={buttonStartResetStyle}
+                    onClick={handleResetButtonClick}>
+                    Reset
+                </button>
+            </div>
         </div>
     );
 }
+
+document.querySelector("body").style.backgroundColor = "#020529";
+
+const containerStyle = {
+    color: "white",
+};
+
+const sessionBreakContainer = {
+    display: "flex",
+    justifyContent: "space-around",
+};
+
+const TitleStyle = {
+    textAlign: "center",
+    margin: "5vh",
+};
+
+const buttonContainerStyle = {
+    width: "20vw",
+    margin: "10vh auto 0",
+    display: "flex",
+    justifyContent: "space-between",
+};
+
+const buttonStartResetStyle = {
+    border: "solid 2px white",
+    borderRadius: "10px",
+    color: "white",
+    fontWeight: "bold",
+    padding: "10px",
+    backgroundColor: "#020529",
+};
 
 export default App;

@@ -11,16 +11,23 @@ const Break = ({
     const breakLengthInMinutes = moment.duration(breakLength, "s").minutes();
     return (
         <div>
-            <p id="break-label">Break Time</p>
-            <p id="break-length">{breakLengthInMinutes}</p>
-            <button disabled={isStarted} onClick={decrementBreakLength}>
-                -
-            </button>
-            <button disabled={isStarted} onClick={incrementBreakLength}>
-                +
-            </button>
+            <h3>Break Time</h3>
+            <div style={breakContainer}>
+                <button disabled={isStarted} onClick={decrementBreakLength}>
+                    -
+                </button>
+                <p id="break-length">{breakLengthInMinutes}</p>
+                <button disabled={isStarted} onClick={incrementBreakLength}>
+                    +
+                </button>
+            </div>
         </div>
     );
+};
+
+const breakContainer = {
+    display: "flex",
+    justifyContent: "space-between",
 };
 
 export default Break;

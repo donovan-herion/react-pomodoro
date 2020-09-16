@@ -1,4 +1,10 @@
-h1 {
-  color: white;
-  background-color: black;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+button:active {
+    outline: none;
+    border: none;
 }

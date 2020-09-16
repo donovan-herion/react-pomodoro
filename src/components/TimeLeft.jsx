@@ -11,8 +11,6 @@ const TimeLeft = ({
     sessionLength,
     timerLabel,
     setTimerLabel,
-    handleStartStopClick,
-    startStopBtn,
     timeLeft,
     setTimeLeft,
 }) => {
@@ -37,12 +35,24 @@ const TimeLeft = ({
         .format("mm:ss", {trim: false});
 
     return (
-        <div>
-            <p>{timerLabel}</p>
-            {formattedTimeLeft}
-            <button onClick={handleStartStopClick}>{startStopBtn}</button>
+        <div style={timeLeftContainer}>
+            <h3>{timerLabel}</h3>
+            <p>{formattedTimeLeft}</p>
         </div>
     );
+};
+
+const timeLeftContainer = {
+    width: "20vw",
+    height: "20vw",
+    margin: "5vh auto",
+    padding: "5vw",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    border: "3px white solid",
+    borderRadius: "50%",
 };
 
 export default TimeLeft;
