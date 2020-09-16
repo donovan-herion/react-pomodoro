@@ -38,7 +38,7 @@ const TimeLeft = ({
 
     return (
         <div>
-            <p>Time left</p>
+            <p>{timerLabel}</p>
             {formattedTimeLeft}
             <button onClick={handleStartStopClick}>{startStopBtn}</button>
         </div>

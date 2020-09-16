@@ -2,10 +2,11 @@ import React, {useState, useEffect} from "react";
 import Break from "./components/Break";
 import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
+import moment from "moment";
 
 function App() {
-    const [sessionLength, SetSessionLength] = useState(60 * 25);
-    const [breakLength, SetBreakLength] = useState(300);
+    const [sessionLength, setSessionLength] = useState(60 * 25);
+    const [breakLength, setBreakLength] = useState(300);
     const [IntervalId, setIntervalId] = useState(null);
     const [currentSessionType, setCurrentSessionType] = useState("Session"); // 'Session' or 'Break'
     const [timeLeft, setTimeLeft] = useState(sessionLength);
@@ -14,32 +15,40 @@ function App() {
         setTimeLeft(sessionLength);
     }, [sessionLength]);
 
+    const formattedTitleTimeLeft = moment
+        .duration(timeLeft, "s")
+        .format("mm:ss", {trim: false});
+
+    useEffect(() => {
+        document.title = `${formattedTitleTimeLeft} | ${currentSessionType} - Pomodoro App`;
+    }, [formattedTitleTimeLeft]);
+
     const decrementBreakLength = () => {
         const newBreakLength = breakLength - 60;
 
         if (newBreakLength < 0) {
-            SetBreakLength(0);
+            setBreakLength(0);
         } else {
-            SetBreakLength(newBreakLength);
+            setBreakLength(newBreakLength);
         }
     };
 
     const incrementBreakLength = () => {
-        SetBreakLength(breakLength + 60);
+        setBreakLength(breakLength + 60);
     };
 
     const decrementSessionLength = () => {
         const newSessionLength = sessionLength - 60;
 
         if (newSessionLength < 0) {
-            SetSessionLength(0);
+            setSessionLength(0);
         } else {
-            SetSessionLength(newSessionLength);
+            setSessionLength(newSessionLength);
         }
     };
 
     const incrementSessionLength = () => {
-        SetSessionLength(sessionLength + 60);
+        setSessionLength(sessionLength + 60);
     };
 
     const isStarted = IntervalId !== null;
@@ -52,22 +61,22 @@ function App() {
             //decrement time left by one every second (1000ms)
             const newIntervalId = setInterval(() => {
                 setTimeLeft((previousTimeLeft) => previousTimeLeft - 1);
-            }, 30);
+            }, 1000);
             setIntervalId(newIntervalId);
         }
     };
 
-    // const handleResetButtonClick = () => {
-    //     //set tout sur null
-    // };
+    const handleResetButtonClick = () => {
+        clearInterval(IntervalId);
+        setIntervalId(null);
+        setCurrentSessionType("Session");
+        setSessionLength(60 * 25);
+        setBreakLength(300);
+        setTimeLeft(25 * 60);
+    };
 
     return (
         <div className="App">
-            <Break
-                breakLength={breakLength}
-                decrementBreakLength={decrementBreakLength}
-                incrementBreakLength={incrementBreakLength}
-            />
             <TimeLeft
                 breakLength={breakLength}
                 timerLabel={currentSessionType}
@@ -82,7 +91,15 @@ function App() {
                 sessionLength={sessionLength}
                 decrementSessionLength={decrementSessionLength}
                 incrementSessionLength={incrementSessionLength}
+                isStarted={isStarted}
             />
+            <Break
+                breakLength={breakLength}
+                decrementBreakLength={decrementBreakLength}
+                incrementBreakLength={incrementBreakLength}
+                isStarted={isStarted}
+            />
+            <button onClick={handleResetButtonClick}>Reset</button>
         </div>
     );
 }
