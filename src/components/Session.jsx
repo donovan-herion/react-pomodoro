@@ -11,12 +11,17 @@ const Session = ({
     const sessionLengthInMinutes = moment
         .duration(sessionLength, "s")
         .minutes();
+
     return (
         <div>
             <h3 style={sessionTitle}>Session Time</h3>
             <div style={sessionContainer}>
                 <button
-                    style={buttonPlusMinusStyle}
+                    style={
+                        isStarted
+                            ? buttonPlusMinusStyleDisabledButton
+                            : buttonPlusMinusStyle
+                    }
                     disabled={isStarted}
                     onClick={decrementSessionLength}>
                     -
@@ -25,7 +30,11 @@ const Session = ({
                     {sessionLengthInMinutes}
                 </p>
                 <button
-                    style={buttonPlusMinusStyle}
+                    style={
+                        isStarted
+                            ? buttonPlusMinusStyleDisabledButton
+                            : buttonPlusMinusStyle
+                    }
                     disabled={isStarted}
                     onClick={incrementSessionLength}>
                     +
@@ -65,6 +74,18 @@ const buttonPlusMinusStyle = {
     fontSize: "1em",
     padding: "10px 20px",
     backgroundColor: "#020529",
+};
+
+const buttonPlusMinusStyleDisabledButton = {
+    border: "solid 2px red",
+    borderRadius: "15px",
+    opacity: "50%",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "1em",
+    padding: "10px 20px",
+    backgroundColor: "#020529",
+    cursor: "not-allowed",
 };
 
 export default Session;
